@@ -30,6 +30,7 @@ public class StatusBarViewModel : MyReactiveObject
     public ReactiveCommand<Unit, Unit> NotifyLeftClickCmd { get; }
     public ReactiveCommand<Unit, Unit> ShowWindowCmd { get; }
     public ReactiveCommand<Unit, Unit> HideWindowCmd { get; }
+    public PosixSignalRegistration ShowWindowSignal { get; }
 
     #region System Proxy
 
@@ -136,6 +137,13 @@ public class StatusBarViewModel : MyReactiveObject
         CopyProxyCmdToClipboardCmd = ReactiveCommand.CreateFromTask(async () =>
         {
             await CopyProxyCmdToClipboard();
+        });
+
+
+        ShowWindowSignal = PosixSignalRegistration.Create((PosixSignal)10 /* SIGUSR1 */, ctx =>
+        {
+            AppEvents.ShowHideWindowRequested.Publish(true);
+            ctx.Cancel = true;
         });
 
         NotifyLeftClickCmd = ReactiveCommand.CreateFromTask(async () =>
