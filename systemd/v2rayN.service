@@ -1,0 +1,13 @@
+[Unit]
+Description=Run v2rayN
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+ExecStart=v2rayn
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=gnome-session.target
