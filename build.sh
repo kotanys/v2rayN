@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$1" = "--package" ]; then
-    sh ./package-rhel.sh --buildfrom 3 --with-core xray
+    sh ./package-rhel.sh --buildfrom 3
     exit 0
 fi
 
