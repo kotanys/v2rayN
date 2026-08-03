@@ -1,0 +1,18 @@
+#!/bin/sh
+
+CTL='systemctl --user'
+
+case "$1" in
+stop)
+    $CTL stop v2rayN.service
+    ;;
+*)
+    if $CTL is-active v2rayN.service >&2 2>/dev/null; then
+        $CTL kill --signal=SIGUSR1 v2rayN.service
+    else
+        $CTL start v2rayN.service
+    fi
+    ;;
+esac
+
+# vim:ff=unix
