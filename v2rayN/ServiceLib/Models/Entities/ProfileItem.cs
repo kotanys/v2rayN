@@ -1,6 +1,5 @@
 namespace ServiceLib.Models.Entities;
 
-[Serializable]
 public class ProfileItem
 {
     private ProtocolExtraItem? _protocolExtraCache;
@@ -66,7 +65,7 @@ public class ProfileItem
 
     public bool IsValid()
     {
-        if (IsComplex())
+        if (IsComplex() || ConfigType == EConfigType.Outbound)
         {
             return true;
         }

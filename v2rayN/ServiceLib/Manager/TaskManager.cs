@@ -19,12 +19,10 @@ public class TaskManager
     {
         Logging.SaveLog("Setup Scheduled Tasks");
 
+        using var timer = new PeriodicTimer(TimeSpan.FromMinutes(1));
         var numOfExecuted = 1;
-        while (true)
+        while (await timer.WaitForNextTickAsync().ConfigureAwait(false))
         {
-            //1 minute
-            await Task.Delay(1000 * 60);
-
             //Execute once 1 minute
             try
             {
@@ -57,8 +55,8 @@ public class TaskManager
                 //Logging.SaveLog("Execute delete expired files");
 
                 FileUtils.DeleteExpiredFiles(Utils.GetBinConfigPath(), DateTime.Now.AddHours(-1), "Test");
-                FileUtils.DeleteExpiredFiles(Utils.GetLogPath(), DateTime.Now.AddMonths(-1));
-                FileUtils.DeleteExpiredFiles(Utils.GetTempPath(), DateTime.Now.AddMonths(-1));
+                FileUtils.DeleteExpiredFiles(Utils.GetLogPath(), DateTime.Now.AddDays(-7));
+                FileUtils.DeleteExpiredFiles(Utils.GetTempPath(), DateTime.Now.AddDays(-7));
 
                 try
                 {
@@ -103,7 +101,7 @@ public class TaskManager
 
         foreach (var item in lstSubs)
         {
-            await SubscriptionHandler.UpdateProcess(_config, item.Id, true, async (success, msg) =>
+            var handler = new SubscriptionHandler(_config, true, async (success, msg) =>
             {
                 await _updateFunc?.Invoke(success, msg);
                 if (success)
@@ -111,6 +109,7 @@ public class TaskManager
                     Logging.SaveLog($"Update subscription end. {msg}");
                 }
             });
+            await handler.UpdateProcess(item.Id);
             item.UpdateTime = updateTime;
             await ConfigHandler.AddSubItem(_config, item);
             await Task.Delay(1000);
@@ -123,7 +122,8 @@ public class TaskManager
         {
             Logging.SaveLog("Execute update geo files");
 
-            await new UpdateService(_config, async (success, msg) =>
+            using var downloadService = await DownloadService.CreateDownloadServiceWithCheck(_config.CheckUpdateItem.UpdateViaProxy);
+            await new UpdateService(downloadService, _config, async (success, msg) =>
             {
                 await _updateFunc?.Invoke(false, msg);
             }).UpdateGeoFileAll();
@@ -134,9 +134,10 @@ public class TaskManager
     {
         Logging.SaveLog("Execute check update");
 
-        var updateService = new UpdateService(_config, async (success, msg) => await Task.CompletedTask);
+        using var downloadService = await DownloadService.CreateDownloadServiceWithCheck(_config.CheckUpdateItem.UpdateViaProxy);
+        var updateService = new UpdateService(downloadService, _config, async (success, msg) => await Task.CompletedTask);
 
-        var msgs = await updateService.CheckHasUpdateOnlyAll(_config.CheckUpdateItem.CheckPreReleaseUpdate);
+        var msgs = await updateService.CheckHasUpdateOnlyAll();
         foreach (var msg in msgs)
         {
             await _updateFunc?.Invoke(false, msg);

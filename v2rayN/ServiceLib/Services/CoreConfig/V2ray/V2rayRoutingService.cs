@@ -188,7 +188,8 @@ public partial class CoreConfigV2rayService
 
         if (node == null
             || (!Global.XraySupportConfigType.Contains(node.ConfigType)
-            && !node.ConfigType.IsGroupType()))
+            && !node.ConfigType.IsGroupType()
+            && node.ConfigType is not EConfigType.Outbound))
         {
             return Global.ProxyTag;
         }
@@ -199,11 +200,12 @@ public partial class CoreConfigV2rayService
             return tag;
         }
 
-        var proxyOutbounds = new CoreConfigV2rayService(context with { Node = node, }).BuildAllProxyOutbounds(tag);
+        var service = new CoreConfigV2rayService(context with { Node = node, });
+        var proxyOutbounds = service.BuildAllProxyOutbounds(tag);
         _coreConfig.outbounds.AddRange(proxyOutbounds);
         if (proxyOutbounds.Count(n => n.tag.StartsWith(tag)) > 1)
         {
-            var multipleLoad = node.GetProtocolExtra().MultipleLoad ?? EMultipleLoad.LeastPing;
+            var multipleLoad = service.FindFirstPolicyGroupMultipleLoad() ?? EMultipleLoad.LeastPing;
             GenObservatory(multipleLoad, tag);
             GenBalancer(multipleLoad, tag);
         }

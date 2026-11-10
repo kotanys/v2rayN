@@ -1,5 +1,4 @@
 using v2rayN.Desktop.Base;
-using v2rayN.Desktop.Common;
 
 namespace v2rayN.Desktop.Views;
 
@@ -126,6 +125,7 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
                             this.Bind(ViewModel, vm => vm.WgReserved, v => v.txtPath9.Text).DisposeWith(currentTypeDisposables);
                             this.Bind(ViewModel, vm => vm.WgInterfaceAddress, v => v.txtRequestHost9.Text).DisposeWith(currentTypeDisposables);
                             this.Bind(ViewModel, vm => vm.WgMtu, v => v.txtShortId9.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.WgDns, v => v.txtDns.Text).DisposeWith(currentTypeDisposables);
                             break;
 
                         case EConfigType.Anytls:
@@ -141,11 +141,21 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
                             this.Bind(ViewModel, vm => vm.InsecureConcurrency, v => v.txtInsecureConcurrency12.Text).DisposeWith(currentTypeDisposables);
                             this.Bind(ViewModel, vm => vm.Uot, v => v.togUotEnabled12.IsChecked).DisposeWith(currentTypeDisposables);
                             break;
+
+                        case EConfigType.MASQUE:
+                            this.Bind(ViewModel, vm => vm.SelectedSource.Username, v => v.txtId14.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.SelectedSource.Password, v => v.txtSecurity14.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.MasquePath, v => v.txtPath14.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.MasqueHeaders, v => v.txtHttpHeaders14.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.WarpPublicKey, v => v.txtWarpPublicKey.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.WarpPrivateKey, v => v.txtWarpPrivateKey.Text).DisposeWith(currentTypeDisposables);
+                            this.Bind(ViewModel, vm => vm.WarpAddress, v => v.txtWarpAddress.Text).DisposeWith(currentTypeDisposables);
+                            break;
                     }
                 })
                 .DisposeWith(disposables);
 
-            this.Bind(ViewModel, vm => vm.SelectedSource.Network, v => v.cmbNetwork.SelectedValue).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.Network, v => v.cmbNetwork.SelectedValue).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.RawHeaderType, v => v.cmbHeaderTypeRaw.SelectedValue).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.Host, v => v.txtRequestHostRaw.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.Path, v => v.txtPathRaw.Text).DisposeWith(disposables);
@@ -168,6 +178,19 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
             this.Bind(ViewModel, vm => vm.GrpcMode, v => v.cmbHeaderTypeGrpc.SelectedValue).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.GrpcAuthority, v => v.txtRequestHostGrpc.Text).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.GrpcServiceName, v => v.txtPathGrpc.Text).DisposeWith(disposables);
+
+            cmbProviderXdrive.ItemsSource = Global.XdriveProviders;
+            this.Bind(ViewModel, vm => vm.XdriveProvider, v => v.cmbProviderXdrive.SelectedValue).DisposeWith(disposables);
+
+            cmbServiceXdrive.ItemsSource = Global.XdriveServices;
+            this.Bind(ViewModel, vm => vm.XdriveService, v => v.cmbServiceXdrive.SelectedValue).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveRemoteFolder, v => v.txtRemoteFolderXdrive.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveSecrets, v => v.txtSecretsXdrive.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveS3Endpoint, v => v.txtEndpointXdrive.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveS3Bucket, v => v.txtBucketXdrive.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveS3Region, v => v.txtRegionXdrive.Text).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveS3PathStyle, v => v.togPathStyleXdrive.IsChecked).DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.XdriveExtra, v => v.txtExtraXdrive.Text).DisposeWith(disposables);
 
             this.Bind(ViewModel, vm => vm.SelectedSource.StreamSecurity, v => v.cmbStreamSecurity.SelectedValue).DisposeWith(disposables);
             this.Bind(ViewModel, vm => vm.SelectedSource.Sni, v => v.txtSNI.Text).DisposeWith(disposables);
@@ -194,7 +217,6 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
             this.BindCommand(ViewModel, vm => vm.FetchCertChainCmd, v => v.btnFetchCertChain).DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.SaveCmd, v => v.btnSave).DisposeWith(disposables);
         });
-
     }
 
     private void InitializeData(ProfileItem profileItem)
@@ -284,6 +306,12 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
 
                 cmbCongestionControl12.ItemsSource = Global.NaiveCongestionControls;
                 break;
+
+            case EConfigType.MASQUE:
+                gridMasque.IsVisible = true;
+                sepa2.IsVisible = false;
+                gridTransport.IsVisible = false;
+                break;
         }
         cmbStreamSecurity.ItemsSource = lstStreamSecurity;
         cmbStreamSecurity.SelectedItem = profileItem.StreamSecurity;
@@ -344,6 +372,7 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
         gridTransportHttpupgrade.IsVisible = false;
         gridTransportXhttp.IsVisible = false;
         gridTransportGrpc.IsVisible = false;
+        gridTransportXdrive.IsVisible = false;
 
         switch (network)
         {
@@ -369,6 +398,10 @@ public partial class AddServerWindow : WindowBase<AddServerViewModel>
 
             case nameof(ETransport.grpc):
                 gridTransportGrpc.IsVisible = true;
+                break;
+
+            case nameof(ETransport.xdrive):
+                gridTransportXdrive.IsVisible = true;
                 break;
 
             default:

@@ -693,6 +693,9 @@
   <data name="TbSettingsEnableCheckPreReleaseUpdate" xml:space="preserve">
     <value>به روز رسانی های پیش از انتشار را بررسی شود</value>
   </data>
+  <data name="TbSettingsEnableUpdateViaProxy" xml:space="preserve">
+    <value>به‌روزرسانی از طریق پروکسی</value>
+  </data>
   <data name="TbSettingsException" xml:space="preserve">
     <value>استثنا</value>
   </data>
@@ -1062,6 +1065,9 @@
   <data name="TbSettingsTunStack" xml:space="preserve">
     <value>پشته شبکه</value>
   </data>
+  <data name="TbSettingsTunDnsMode" xml:space="preserve">
+    <value>حالت DNS</value>
+  </data>
   <data name="TbMtu" xml:space="preserve">
     <value>MTU</value>
   </data>
@@ -1215,7 +1221,7 @@
   <data name="menuModeRule" xml:space="preserve">
     <value>قانون</value>
   </data>
-  <data name="menuProxiesDelaytest" xml:space="preserve">
+  <data name="menuDelaytest" xml:space="preserve">
     <value>تست تأخیر</value>
   </data>
   <data name="menuProxiesDelaytestPart" xml:space="preserve">
@@ -1456,7 +1462,7 @@
     <value>Custom DNS Enabled, This Page's Settings Invalid</value>
   </data>
   <data name="TbBlockSVCBHTTPSQueriesTips" xml:space="preserve">
-    <value>Block ECH and HTTP/3 availability checks when enabled</value>
+    <value>Block ECH and HTTP/3 availability checks when enabled. Always enabled in Xray</value>
   </data>
   <data name="FillCorrectConfigTemplateText" xml:space="preserve">
     <value>Please fill in the correct config template</value>
@@ -1769,5 +1775,41 @@ The "Get Certificate" action may fail if a self-signed certificate is used or if
   </data>
   <data name="menuNewUpdate" xml:space="preserve">
     <value>New Update</value>
+  </data>
+  <data name="XdriveProvider" xml:space="preserve">
+    <value>ارائه‌دهنده پیش‌فرض</value>
+  </data>
+  <data name="XdriveService" xml:space="preserve">
+    <value>سرویس ذخیره‌سازی (service)</value>
+  </data>
+  <data name="XdriveRemoteFolder" xml:space="preserve">
+    <value>پوشه ریموت (remoteFolder)</value>
+  </data>
+  <data name="XdriveSecrets" xml:space="preserve">
+    <value>کلیدهای دسترسی (AK,SK / OAuth)</value>
+  </data>
+  <data name="XdriveS3Endpoint" xml:space="preserve">
+    <value>آدرس اندپوینت S3</value>
+  </data>
+  <data name="XdriveS3Region" xml:space="preserve">
+    <value>منطقه S3 (region)</value>
+  </data>
+  <data name="XdriveS3Bucket" xml:space="preserve">
+    <value>باکت S3 (bucket)</value>
+  </data>
+  <data name="XdriveS3PathStyle" xml:space="preserve">
+    <value>آدرس‌دهی مستقیم S3 (PathStyle)</value>
+  </data>
+  <data name="XdriveExtra" xml:space="preserve">
+    <value>تنظیمات پیشرفته XDRIVE</value>
+  </data>
+  <data name="XdriveExtraTip" xml:space="preserve">
+    <value>فرمت JSON خام: { XdriveObject }</value>
+  </data>
+  <data name="TransportHeaderType6" xml:space="preserve">
+    <value>سرویس XDRIVE</value>
+  </data>
+  <data name="TransportPathTip6" xml:space="preserve">
+    <value>پوشه ریموت XDRIVE</value>
   </data>
 </root>

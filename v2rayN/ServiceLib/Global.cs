@@ -42,11 +42,13 @@ public class Global
     public const string SingboxFakeIPFilterFileName = NamespaceSample + "singbox_fakeip_filter";
     public const string ChromeRootCertFileName = NamespaceSample + "chrome_roots_pem";
     public const string MozillaRootCertFileName = NamespaceSample + "mozilla_roots_pem";
+    public const string TaskXmlTemplateFileName = NamespaceSample + "TaskXmlTemplate";
 
     public const string ChromeRootProvider = "chrome";
     public const string MozillaRootProvider = "mozilla";
 
     public const string DefaultSecurity = "auto";
+    public const string BindInterfaceAuto = "AUTO";
     public const string DefaultNetwork = "raw";
     public const string RawHeaderHttp = "http";
     public const string None = "none";
@@ -92,16 +94,27 @@ public class Global
     public const string XrayLocalAsset = "XRAY_LOCATION_ASSET";
     public const string XrayLocalCert = "XRAY_LOCATION_CERT";
     public const int SpeedTestPageSize = 1000;
+    public const int SpeedTestConcurrencyCountMin = 10;
     public const string LinuxBash = "/bin/bash";
     public const string StringTrue = "true";
     public const string StringFalse = "false";
     public const int SqliteMaxBatchSize = 10000;
+    public static readonly TimeSpan LocalFetch = TimeSpan.FromSeconds(5);
+    public static readonly TimeSpan DirectFetch = TimeSpan.FromSeconds(10);
+    public static readonly TimeSpan ProxyFetch = TimeSpan.FromSeconds(30);
+    public static readonly TimeSpan DirectDownloadConnect = TimeSpan.FromSeconds(5);
+    public static readonly TimeSpan ProxyDownloadConnect = TimeSpan.FromSeconds(10);
 
-    public const string SingboxDirectDNSTag = "direct_dns";
-    public const string SingboxRemoteDNSTag = "remote_dns";
-    public const string SingboxLocalDNSTag = "local_local";
-    public const string SingboxHostsDNSTag = "hosts_dns";
-    public const string SingboxFakeDNSTag = "fake_dns";
+    public const string SingboxDirectDNSTagPrefix = "direct-dns-";
+    public const string SingboxRemoteDNSTagPrefix = "remote-dns-";
+    public const string SingboxDirectDNSTag = "direct-dns-1";
+    public const string SingboxRemoteDNSTag = "remote-dns-1";
+    public const string SingboxDirectDNSTagTemplate = "direct-dns-{0}";
+    public const string SingboxRemoteDNSTagTemplate = "remote-dns-{0}";
+    public const string SingboxLocalDNSTag = "local-local";
+    public const string SingboxHostsDNSTag = "hosts-dns";
+    public const string SingboxFakeDNSTag = "fake-dns";
+    public const string SingboxSrsDownloadHttpClientTag = "srs-download-http-client";
 
     public const int Hysteria2DefaultHopInt = 30;
     public const string PolicyGroupExcludeKeywords = @"剩余|过期|到期|重置|[Rr]emaining|[Ee]xpir|[Rr]eset";
@@ -250,7 +263,8 @@ public class Global
         { EConfigType.TUIC, "tuic" },
         { EConfigType.WireGuard, "wireguard" },
         { EConfigType.Anytls, "anytls" },
-        { EConfigType.Naive, "naive" }
+        { EConfigType.Naive, "naive" },
+        { EConfigType.MASQUE, "masque" },
     };
 
     public static readonly List<string> VmessSecurities =
@@ -323,7 +337,8 @@ public class Global
         "kcp",
         "grpc",
         "ws",
-        "httpupgrade"
+        "httpupgrade",
+        "xdrive"
     ];
 
     public static readonly List<string> KcpHeaderTypes =
@@ -360,6 +375,7 @@ public class Global
         EConfigType.Trojan,
         EConfigType.Hysteria2,
         EConfigType.WireGuard,
+        EConfigType.MASQUE,
         EConfigType.SOCKS,
         EConfigType.HTTP,
     ];
@@ -375,6 +391,7 @@ public class Global
         EConfigType.Anytls,
         EConfigType.Naive,
         EConfigType.WireGuard,
+        EConfigType.MASQUE,
         EConfigType.SOCKS,
         EConfigType.HTTP,
     ];
@@ -439,6 +456,18 @@ public class Global
         "stream-one"
     ];
 
+    public static readonly List<string> XdriveServices = ["google-drive", "s3", "local"];
+
+    public static readonly List<string> XdriveProviders =
+    [
+        "Cloudflare R2",
+        "Google Drive",
+        "AWS S3 (Global)",
+        "Yandex Cloud S3",
+        "ArvanCloud S3",
+        "Custom S3"
+    ];
+
     public static readonly List<string> DomainStrategy =
     [
         "AsIs",
@@ -484,16 +513,36 @@ public class Global
         "localhost"
     ];
 
+    public static readonly List<string> DomainDNS4PreResolveAddress =
+    [
+        "",
+        "https://doh.pub/dns-query",
+        "https://dns.alidns.com/dns-query",
+        "119.29.29.29",
+        "223.5.5.5",
+        "localhost",
+        "https://cloudflare-dns.com/dns-query",
+        "https://dns.google/dns-query",
+        "8.8.8.8",
+        "1.1.1.1",
+    ];
+
+    public static readonly List<LanguageOption> LanguageOptions =
+    [
+        new("zh-Hans", "简体中文"),
+        new("zh-Hant", "繁體中文"),
+        new("en", "English"),
+        new("fa", "فارسی"),
+        new("fr", "Français"),
+        new("ru", "Русский"),
+        new("hu", "Magyar"),
+        new("id", "Bahasa Indonesia"),
+        new("az", "Azərbaycan dili")
+    ];
+
     public static readonly List<string> Languages =
     [
-        "zh-Hans",
-        "zh-Hant",
-        "en",
-        "fa",
-        "fr",
-        "ru",
-        "hu",
-        "id"
+        .. LanguageOptions.Select(t => t.Value)
     ];
 
     public static readonly List<string> Alpns =
@@ -572,6 +621,16 @@ public class Global
         "mixed"
     ];
 
+    public const string TunDnsModeDefault = "Default";
+
+    public static readonly List<string> TunDnsModes =
+    [
+        TunDnsModeDefault,
+        "disabled",
+        "native",
+        "hijack"
+    ];
+
     public static readonly List<string> PresetMsgFilters =
     [
         "proxy",
@@ -636,10 +695,10 @@ public class Global
         { ECoreType.Xray, "XTLS/Xray-core" },
         { ECoreType.sing_box, "SagerNet/sing-box" },
         { ECoreType.mihomo, "MetaCubeX/mihomo" },
-        { ECoreType.hysteria, "apernet/hysteria" },
-        { ECoreType.hysteria2, "apernet/hysteria" },
+        { ECoreType.hysteria, "HyNetworks/hysteria" },
+        { ECoreType.hysteria2, "HyNetworks/hysteria" },
         { ECoreType.naiveproxy, "klzgrad/naiveproxy" },
-        { ECoreType.tuic, "EAimTY/tuic" },
+        { ECoreType.tuic, "tuic-protocol/tuic" },
         { ECoreType.juicity, "juicity/juicity" },
         { ECoreType.brook, "txthinking/brook" },
         { ECoreType.overtls, "ShadowsocksR-Live/overtls" },
@@ -736,6 +795,12 @@ public class Global
     [
         "198.18.0.0/15",
         "11.0.0.0/8",
+    ];
+
+    public static readonly List<string> FakeIPv6Ranges =
+    [
+        "fc00::/18",
+        "2001:2::/48",
     ];
 
     public static readonly List<string> RootCertProviders =

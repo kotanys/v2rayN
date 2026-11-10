@@ -1,6 +1,5 @@
 namespace ServiceLib.Models.Entities;
 
-[Serializable]
 public class SubItem
 {
     [PrimaryKey]
@@ -15,6 +14,8 @@ public class SubItem
     public bool Enabled { get; set; } = true;
 
     public string UserAgent { get; set; } = string.Empty;
+
+    public string? RequestHeaders { get; set; }
 
     public int Sort { get; set; }
 
@@ -33,4 +34,8 @@ public class SubItem
     public int? PreSocksPort { get; set; }
 
     public string? Memo { get; set; }
+
+    public ECoreType? CustomCoreType { get; set; }
+
+    public string? PreResolver { get; set; }
 }

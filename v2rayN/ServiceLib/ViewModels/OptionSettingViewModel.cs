@@ -22,6 +22,9 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial string DefUserAgent { get; set; }
     [Reactive] public partial string SendThrough { get; set; }
     [Reactive] public partial string BindInterface { get; set; }
+    [Reactive] public partial int? Mux4RayConcurrency { get; set; }
+    [Reactive] public partial int? Mux4RayXudpConcurrency { get; set; }
+    [Reactive] public partial string Mux4RayXudpProxyUDP443 { get; set; }
     [Reactive] public partial string Mux4SboxProtocol { get; set; }
     [Reactive] public partial bool EnableCacheFile4Sbox { get; set; }
     [Reactive] public partial int? HyUpMbps { get; set; }
@@ -94,6 +97,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial bool TunEnableIPv6Address { get; set; }
     [Reactive] public partial string TunIcmpRouting { get; set; }
     [Reactive] public partial bool TunEnableLegacyProtect { get; set; }
+    [Reactive] public partial string TunDnsMode { get; set; }
     [Reactive] public partial string TunRouteExcludeAddress { get; set; }
     [Reactive] public partial string TunIPv4Address { get; set; }
     [Reactive] public partial string TunIPv6Address { get; set; }
@@ -110,6 +114,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
     [Reactive] public partial string CoreType6 { get; set; }
     [Reactive] public partial string CoreType7 { get; set; }
     [Reactive] public partial string CoreType9 { get; set; }
+    [Reactive] public partial string CoreType14 { get; set; }
 
     #endregion CoreType
 
@@ -152,6 +157,9 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         DefUserAgent = _config.CoreBasicItem.DefUserAgent;
         SendThrough = _config.CoreBasicItem.SendThrough ?? string.Empty;
         BindInterface = _config.CoreBasicItem.BindInterface ?? string.Empty;
+        Mux4RayConcurrency = _config.Mux4RayItem.Concurrency;
+        Mux4RayXudpConcurrency = _config.Mux4RayItem.XudpConcurrency;
+        Mux4RayXudpProxyUDP443 = _config.Mux4RayItem.XudpProxyUDP443 ?? string.Empty;
         Mux4SboxProtocol = _config.Mux4SboxItem.Protocol;
         EnableCacheFile4Sbox = _config.CoreBasicItem.EnableCacheFile4Sbox;
         HyUpMbps = _config.HysteriaItem.UpMbps;
@@ -215,6 +223,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         TunEnableIPv6Address = _config.TunModeItem.EnableIPv6Address;
         TunIcmpRouting = _config.TunModeItem.IcmpRouting;
         TunEnableLegacyProtect = _config.TunModeItem.EnableLegacyProtect;
+        TunDnsMode = _config.TunModeItem.DnsMode.NullIfEmpty() ?? Global.TunDnsModeDefault;
         TunRouteExcludeAddress = Utils.List2String(_config.TunModeItem.RouteExcludeAddress, true);
         TunIPv4Address = _config.TunModeItem.IPv4Address;
         TunIPv6Address = _config.TunModeItem.IPv6Address;
@@ -277,6 +286,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
                 case 9:
                     CoreType9 = type;
                     break;
+
+                case 14:
+                    CoreType14 = type;
+                    break;
             }
         });
         await Task.CompletedTask;
@@ -327,6 +340,9 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         _config.CoreBasicItem.DefUserAgent = DefUserAgent;
         _config.CoreBasicItem.SendThrough = SendThrough.TrimEx();
         _config.CoreBasicItem.BindInterface = BindInterface.TrimEx();
+        _config.Mux4RayItem.Concurrency = Mux4RayConcurrency > 0 ? Mux4RayConcurrency : null;
+        _config.Mux4RayItem.XudpConcurrency = Mux4RayXudpConcurrency > 0 ? Mux4RayXudpConcurrency : null;
+        _config.Mux4RayItem.XudpProxyUDP443 = Mux4RayXudpProxyUDP443.NullIfEmpty();
         _config.Mux4SboxItem.Protocol = Mux4SboxProtocol;
         _config.CoreBasicItem.EnableCacheFile4Sbox = EnableCacheFile4Sbox;
         _config.HysteriaItem.UpMbps = HyUpMbps ?? 0;
@@ -381,6 +397,7 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
         _config.TunModeItem.EnableIPv6Address = TunEnableIPv6Address;
         _config.TunModeItem.IcmpRouting = TunIcmpRouting;
         _config.TunModeItem.EnableLegacyProtect = TunEnableLegacyProtect;
+        _config.TunModeItem.DnsMode = TunDnsMode == Global.TunDnsModeDefault ? null : TunDnsMode;
         _config.TunModeItem.RouteExcludeAddress = Utils.String2List(TunRouteExcludeAddress);
         _config.TunModeItem.IPv4Address = TunIPv4Address;
         _config.TunModeItem.IPv6Address = TunIPv6Address;
@@ -440,6 +457,10 @@ public partial class OptionSettingViewModel : MyReactiveObject, ICloseable
 
                 case 9:
                     type = CoreType9;
+                    break;
+
+                case 14:
+                    type = CoreType14;
                     break;
 
                 default:

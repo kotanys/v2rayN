@@ -178,7 +178,7 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Failed to import custom configuration Configuration 的本地化字符串。
+        ///   查找类似 Failed to import configuration 的本地化字符串。
         /// </summary>
         public static string FailedImportedCustomServer {
             get {
@@ -219,6 +219,15 @@ namespace ServiceLib.Resx {
         public static string FillCorrectDNSText {
             get {
                 return ResourceManager.GetString("FillCorrectDNSText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Enter a valid IPv6 CIDR range with at least two addresses, for example fc00::/18. 的本地化字符串。
+        /// </summary>
+        public static string FillCorrectFakeIPv6Range {
+            get {
+                return ResourceManager.GetString("FillCorrectFakeIPv6Range", resourceCulture);
             }
         }
         
@@ -268,7 +277,7 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Please browse to import Configuration configuration 的本地化字符串。
+        ///   查找类似 Please browse to import configuration 的本地化字符串。
         /// </summary>
         public static string FillServerAddressCustom {
             get {
@@ -439,6 +448,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Custom config core 的本地化字符串。
+        /// </summary>
+        public static string LvCustomCoreType {
+            get {
+                return ResourceManager.GetString("LvCustomCoreType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Custom icon 的本地化字符串。
         /// </summary>
         public static string LvCustomIcon {
@@ -520,6 +538,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Pre-resolve server domains 的本地化字符串。
+        /// </summary>
+        public static string LvPreResolve {
+            get {
+                return ResourceManager.GetString("LvPreResolve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Previous proxy remarks 的本地化字符串。
         /// </summary>
         public static string LvPrevProfile {
@@ -543,6 +570,15 @@ namespace ServiceLib.Resx {
         public static string LvRemarks {
             get {
                 return ResourceManager.GetString("LvRemarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 HTTP headers (JSON) 的本地化字符串。
+        /// </summary>
+        public static string LvRequestHeaders {
+            get {
+                return ResourceManager.GetString("LvRequestHeaders", resourceCulture);
             }
         }
         
@@ -736,6 +772,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Add a custom outbound 的本地化字符串。
+        /// </summary>
+        public static string menuAddCustomOutboundServer {
+            get {
+                return ResourceManager.GetString("menuAddCustomOutboundServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Add a custom configuration 的本地化字符串。
         /// </summary>
         public static string menuAddCustomServer {
@@ -759,6 +804,15 @@ namespace ServiceLib.Resx {
         public static string menuAddHysteria2Server {
             get {
                 return ResourceManager.GetString("menuAddHysteria2Server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Add [MASQUE] 的本地化字符串。
+        /// </summary>
+        public static string menuAddMasqueServer {
+            get {
+                return ResourceManager.GetString("menuAddMasqueServer", resourceCulture);
             }
         }
         
@@ -898,6 +952,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Check and Update 的本地化字符串。
+        /// </summary>
+        public static string menuCheckAndUpdate {
+            get {
+                return ResourceManager.GetString("menuCheckAndUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Only Check 的本地化字符串。
         /// </summary>
         public static string menuCheckOnly {
@@ -932,7 +995,7 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("menuClose", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   查找类似 Close Connection 的本地化字符串。
         /// </summary>
@@ -966,6 +1029,24 @@ namespace ServiceLib.Resx {
         public static string menuCopyServer {
             get {
                 return ResourceManager.GetString("menuCopyServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Currently frozen first {0} column(s) 的本地化字符串。
+        /// </summary>
+        public static string menuCurrentlyFrozenColumns {
+            get {
+                return ResourceManager.GetString("menuCurrentlyFrozenColumns", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Latency Test 的本地化字符串。
+        /// </summary>
+        public static string menuDelaytest {
+            get {
+                return ResourceManager.GetString("menuDelaytest", resourceCulture);
             }
         }
         
@@ -1105,6 +1186,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Freeze up to this column 的本地化字符串。
+        /// </summary>
+        public static string menuFreezeToThisColumn {
+            get {
+                return ResourceManager.GetString("menuFreezeToThisColumn", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Full Config Template Setting 的本地化字符串。
         /// </summary>
         public static string menuFullConfigTemplate {
@@ -1149,6 +1239,15 @@ namespace ServiceLib.Resx {
             }
         }
         
+        /// <summary>
+        ///   查找类似 Hide this column 的本地化字符串。
+        /// </summary>
+        public static string menuHideThisColumn {
+            get {
+                return ResourceManager.GetString("menuHideThisColumn", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查找类似 Import Rules From Clipboard 的本地化字符串。
         /// </summary>
@@ -1380,15 +1479,6 @@ namespace ServiceLib.Resx {
         public static string menuPromotion {
             get {
                 return ResourceManager.GetString("menuPromotion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Latency Test 的本地化字符串。
-        /// </summary>
-        public static string menuProxiesDelaytest {
-            get {
-                return ResourceManager.GetString("menuProxiesDelaytest", resourceCulture);
             }
         }
         
@@ -1735,6 +1825,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Show columns 的本地化字符串。
+        /// </summary>
+        public static string menuShowColumns {
+            get {
+                return ResourceManager.GetString("menuShowColumns", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 Show or hide the main window 的本地化字符串。
         /// </summary>
         public static string menuShowOrHideMainWindow {
@@ -1924,6 +2023,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Unfreeze all columns 的本地化字符串。
+        /// </summary>
+        public static string menuUnfreezeAllColumns {
+            get {
+                return ResourceManager.GetString("menuUnfreezeAllColumns", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   查找类似 {0} Website 的本地化字符串。
         /// </summary>
         public static string menuWebsiteItem {
@@ -1933,7 +2041,7 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Warning: Xray will disable allowInsecure (skip certificate verification) in August 2026. Please switch to pinnedPeerCertSha256 (fixed certificate fingerprint) as soon as possible. allowInsecure will not be usable after its expiration. 的本地化字符串。
+        ///   查找类似 The current node uses an unencrypted connection, meaning your communications could be directly monitored by network intermediaries controlled by authoritarian governments. For security reasons, nodes of this type cannot connect via Xray-core versions 26.2.6 or higher. If this is a self-built node, please enable TLS or other secure encryption, or pin the certificate using pinSHA256. If this is an airport/provider node, please contact your service provider for a technical upgrade. If the provider refuses to c [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string MsgAllowInsecureDeprecated {
             get {
@@ -1974,6 +2082,15 @@ namespace ServiceLib.Resx {
         public static string MsgCoreNotSupportProtocolTransport {
             get {
                 return ResourceManager.GetString("MsgCoreNotSupportProtocolTransport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Custom outbound {0} file not found: {1} 的本地化字符串。
+        /// </summary>
+        public static string MsgCustomOutboundFileNotFound {
+            get {
+                return ResourceManager.GetString("MsgCustomOutboundFileNotFound", resourceCulture);
             }
         }
         
@@ -2113,7 +2230,7 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Not Support 的本地化字符串。
+        ///   查找类似 Not Supported 的本地化字符串。
         /// </summary>
         public static string MsgNotSupport {
             get {
@@ -2608,6 +2725,24 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Invalid HTTP headers. Use a JSON object with unique header names and string values. Header names and values must not contain line breaks. 的本地化字符串。
+        /// </summary>
+        public static string SubRequestHeadersInvalid {
+            get {
+                return ResourceManager.GetString("SubRequestHeadersInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Optional. Example: {&quot;X-hwid&quot;: &quot;my_device&quot;}. Values override default headers for all URLs in this group, including the subscription conversion service. 的本地化字符串。
+        /// </summary>
+        public static string SubRequestHeadersTips {
+            get {
+                return ResourceManager.GetString("SubRequestHeadersTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 For group please leave blank here 的本地化字符串。
         /// </summary>
         public static string SubUrlTips {
@@ -2626,7 +2761,7 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Custom configuration Configuration imported successfully 的本地化字符串。
+        ///   查找类似 Custom configuration imported successfully 的本地化字符串。
         /// </summary>
         public static string SuccessfullyImportedCustomServer {
             get {
@@ -2743,6 +2878,24 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Block AAAA Queries 的本地化字符串。
+        /// </summary>
+        public static string TbBlockAAAAQueries {
+            get {
+                return ResourceManager.GetString("TbBlockAAAAQueries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Block IPv6 queries when enabled 的本地化字符串。
+        /// </summary>
+        public static string TbBlockAAAAQueriesTips {
+            get {
+                return ResourceManager.GetString("TbBlockAAAAQueriesTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Block SVCB and HTTPS Queries 的本地化字符串。
         /// </summary>
         public static string TbBlockSVCBHTTPSQueries {
@@ -2752,7 +2905,7 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
-        ///   查找类似 Block ECH and HTTP/3 availability checks when enabled 的本地化字符串。
+        ///   查找类似 Block ECH and HTTP/3 availability checks when enabled. Always enabled in Xray 的本地化字符串。
         /// </summary>
         public static string TbBlockSVCBHTTPSQueriesTips {
             get {
@@ -2926,6 +3079,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Only single outbound/endpoint supported for xray/sing-box 的本地化字符串。
+        /// </summary>
+        public static string TbCustomOutboundTip {
+            get {
+                return ResourceManager.GetString("TbCustomOutboundTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Direct Target Resolution Strategy 的本地化字符串。
         /// </summary>
         public static string TbDirectResolveStrategy {
@@ -2958,6 +3120,15 @@ namespace ServiceLib.Resx {
         public static string TbDisplayLog {
             get {
                 return ResourceManager.GetString("TbDisplayLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 DNS 的本地化字符串。
+        /// </summary>
+        public static string TbDNS {
+            get {
+                return ResourceManager.GetString("TbDNS", resourceCulture);
             }
         }
         
@@ -3111,6 +3282,24 @@ namespace ServiceLib.Resx {
         public static string TbFakeIPTips {
             get {
                 return ResourceManager.GetString("TbFakeIPTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 IPv6 FakeIP 的本地化字符串。
+        /// </summary>
+        public static string TbFakeIPv6 {
+            get {
+                return ResourceManager.GetString("TbFakeIPv6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Return fake IPv6 addresses as well. Requires FakeIP to be enabled and AAAA queries to be allowed. 的本地化字符串。
+        /// </summary>
+        public static string TbFakeIPv6Tips {
+            get {
+                return ResourceManager.GetString("TbFakeIPv6Tips", resourceCulture);
             }
         }
         
@@ -4213,6 +4402,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Update via proxy 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsEnableUpdateViaProxy {
+            get {
+                return ResourceManager.GetString("TbSettingsEnableUpdateViaProxy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Exception 的本地化字符串。
         /// </summary>
         public static string TbSettingsException {
@@ -4474,6 +4672,42 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Xray Mux setting 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsMux4Ray {
+            get {
+                return ResourceManager.GetString("TbSettingsMux4Ray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Xray Mux concurrency 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsMux4RayConcurrency {
+            get {
+                return ResourceManager.GetString("TbSettingsMux4RayConcurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Xray Mux XUDP concurrency 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsMux4RayXudpConcurrency {
+            get {
+                return ResourceManager.GetString("TbSettingsMux4RayXudpConcurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Xray Mux XUDP proxy UDP443 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsMux4RayXudpProxyUDP443 {
+            get {
+                return ResourceManager.GetString("TbSettingsMux4RayXudpProxyUDP443", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 sing-box Mux Protocol 的本地化字符串。
         /// </summary>
         public static string TbSettingsMux4SboxProtocol {
@@ -4715,6 +4949,15 @@ namespace ServiceLib.Resx {
                 return ResourceManager.GetString("TbSettingsTunAutoRoute", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 DNS mode 的本地化字符串。
+        /// </summary>
+        public static string TbSettingsTunDnsMode {
+            get {
+                return ResourceManager.GetString("TbSettingsTunDnsMode", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   查找类似 Tun Mode settings 的本地化字符串。
@@ -4888,6 +5131,15 @@ namespace ServiceLib.Resx {
         }
         
         /// <summary>
+        ///   查找类似 Process 的本地化字符串。
+        /// </summary>
+        public static string TbSortingProcess {
+            get {
+                return ResourceManager.GetString("TbSortingProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Time 的本地化字符串。
         /// </summary>
         public static string TbSortingTime {
@@ -4992,6 +5244,24 @@ namespace ServiceLib.Resx {
         public static string TbVerifyPeerCertByName {
             get {
                 return ResourceManager.GetString("TbVerifyPeerCertByName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Warp 的本地化字符串。
+        /// </summary>
+        public static string TbWarp {
+            get {
+                return ResourceManager.GetString("TbWarp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Xray Only 的本地化字符串。
+        /// </summary>
+        public static string TbXrayOnly {
+            get {
+                return ResourceManager.GetString("TbXrayOnly", resourceCulture);
             }
         }
         
@@ -5244,6 +5514,114 @@ namespace ServiceLib.Resx {
         public static string UpgradeAppNotExistTip {
             get {
                 return ResourceManager.GetString("UpgradeAppNotExistTip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Preset Provider 的本地化字符串。
+        /// </summary>
+        public static string XdriveProvider {
+            get {
+                return ResourceManager.GetString("XdriveProvider", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 XDRIVE service 的本地化字符串。
+        /// </summary>
+        public static string XdriveService {
+            get {
+                return ResourceManager.GetString("XdriveService", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Remote folder 的本地化字符串。
+        /// </summary>
+        public static string XdriveRemoteFolder {
+            get {
+                return ResourceManager.GetString("XdriveRemoteFolder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Secrets (comma separated) 的本地化字符串。
+        /// </summary>
+        public static string XdriveSecrets {
+            get {
+                return ResourceManager.GetString("XdriveSecrets", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 S3 Endpoint 的本地化字符串。
+        /// </summary>
+        public static string XdriveS3Endpoint {
+            get {
+                return ResourceManager.GetString("XdriveS3Endpoint", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 S3 Region 的本地化字符串。
+        /// </summary>
+        public static string XdriveS3Region {
+            get {
+                return ResourceManager.GetString("XdriveS3Region", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 S3 Bucket 的本地化字符串。
+        /// </summary>
+        public static string XdriveS3Bucket {
+            get {
+                return ResourceManager.GetString("XdriveS3Bucket", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 S3 Force Path Style 的本地化字符串。
+        /// </summary>
+        public static string XdriveS3PathStyle {
+            get {
+                return ResourceManager.GetString("XdriveS3PathStyle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 XDRIVE Extra 的本地化字符串。
+        /// </summary>
+        public static string XdriveExtra {
+            get {
+                return ResourceManager.GetString("XdriveExtra", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 Raw JSON, format: { XdriveObject } 的本地化字符串。
+        /// </summary>
+        public static string XdriveExtraTip {
+            get {
+                return ResourceManager.GetString("XdriveExtraTip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 XDRIVE service 的本地化字符串。
+        /// </summary>
+        public static string TransportHeaderType6 {
+            get {
+                return ResourceManager.GetString("TransportHeaderType6", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 XDRIVE remote folder 的本地化字符串。
+        /// </summary>
+        public static string TransportPathTip6 {
+            get {
+                return ResourceManager.GetString("TransportPathTip6", resourceCulture);
             }
         }
     }
